@@ -12,3 +12,5 @@ no agendamento:
 - dia e hora que foi criado o agendamento
 
 será feito em django.
+
+decidi fazer com um sistema de login.
