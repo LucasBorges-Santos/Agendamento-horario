@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Loja Python{% endblock %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+    Olá {{ user.username }}!
+    {% else %}
+    Cadastre-se ou faça login.
+    {% endif %}
+
+
+{% endblock %}
