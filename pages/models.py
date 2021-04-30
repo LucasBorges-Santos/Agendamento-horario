@@ -1,20 +1,24 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Scheduling(models.Model):
-    STATUS = (
-        (1, 'Done'),
-        (2, ' Will be done'),
-    )
     name = models.CharField(max_length=255)
-    done = models.CharField(
-        max_length=1,
-        choices=STATUS,
-    )
     scheduling_date = models.DateTimeField(unique=True)
+    scheduling_done = models.CharField(max_length=20)
     phone_number = models.CharField(max_length=15, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if self.scheduling_date >= timezone.now():
+            self.scheduling_done = 'Will be done'
+        else:
+            self.scheduling_done = 'Done'
+        super(Scheduling, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
 
     """
     To create a new schedule, you need to import the module "datetime" this way:
@@ -23,6 +27,6 @@ class Scheduling(models.Model):
         from pages.models import Scheduling
         
         date = datetime.datetime(<year>,<mouth>,<day>,<hour><minutes>,<seconds>,<milliseconds>)
-        new_scheduling = Scheduling(nome="name", done=2,scheduling_date=date)
+        new_scheduling = Scheduling(nome="name", scheduling_date=date)
         new_scheduling.save()
     """
