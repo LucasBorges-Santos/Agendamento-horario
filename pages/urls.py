@@ -4,5 +4,7 @@ from . import views
 app_name = 'pages'
 
 urlpatterns = [
-    path('', views.HomePageView.as_view(), name='home')
+    path('', views.HomePageView, name='home'),
+
+    path('new-scheduling/', views.NewScheduling, name='new_scheduling')
 ]

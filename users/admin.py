@@ -1,3 +1,3 @@
 from django.contrib import admin
 
-# Register your models here.
+# ainda é necessario fazer o usuario personalizado no admin

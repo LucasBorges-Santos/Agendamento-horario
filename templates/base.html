@@ -9,19 +9,22 @@
 <body>
     <header>
         <nav class="navbar navbar-expand navbar-dark bg-dark mb-3">
-            <div class="container">y
-                <a class="navbar-brand" href="{% url 'pages:home' %}">Sistema de login</a>
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'pages:home' %}">Schedules</a>
                 <ul class="navbar-nav">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_logout' %}">Sair</a>
+                        <a class="nav-link" href="{% url 'pages:new_scheduling' %}">New Scheduling</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_logout' %}">Get out</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_login' %}">Entrar</a>
+                        <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_signup' %}">Cadastro</a>
+                        <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
                     </li>
                     {% endif %}
                 </ul>

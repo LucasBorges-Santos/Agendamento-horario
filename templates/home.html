@@ -6,9 +6,13 @@
 
     {% if user.is_authenticated %}
     Olá {{ user.username }}!
+
+    {% for scheduling in schedules %}
+    <p>{{scheduling.name}} - {{scheduling.scheduling_date}} - {{scheduling.scheduling_done}}</p>
+    {% endfor %}
+
     {% else %}
     Cadastre-se ou faça login.
     {% endif %}
-
 
 {% endblock %}
