@@ -13,7 +13,7 @@ class NewScheduling(forms.ModelForm):
     class Meta:
         model = Scheduling
         fields = ['name', 'scheduling_date', 'phone_number']
-        widgets = {'scheduling_date': DateTimeInput()}
+        widgets = {'scheduling_date': DateTimeInput(attrs={'type': 'datetime-local'})}
         help_texts = {'phone_number': 'DDD plus the phone number'}
 
     def clean_scheduling_date(self):

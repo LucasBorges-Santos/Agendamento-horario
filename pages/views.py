@@ -9,6 +9,8 @@ def HomePageView(request):
     user = request.user
 
     if user.is_authenticated:
+        Scheduling.objects.filter(scheduling_date__lte=timezone.now(), user=user).update(scheduling_done='done')
+
         context = {
             'schedules': Scheduling.objects.filter(user=user)
         }
@@ -19,27 +21,31 @@ def HomePageView(request):
 
 
 def NewScheduling(request):
-    if request.method == 'POST':
-        form = NewSchedulingForm(request.POST)
+    user = request.user
 
-        if form.is_valid():
-            user = request.user
-            scheduling_date = form.cleaned_data['scheduling_date']
-            name = form.cleaned_data['name']
-            phone_number = form.cleaned_data['phone_number']
+    if user.is_authenticated:
+        if request.method == 'POST':
+            form = NewSchedulingForm(request.POST)
 
-            new_schedule = Scheduling(
-                user=user,
-                name=name,
-                scheduling_date=scheduling_date,
-                phone_number=phone_number,
-            )
+            if form.is_valid():
+                scheduling_date = form.cleaned_data['scheduling_date']
+                name = form.cleaned_data['name']
+                phone_number = form.cleaned_data['phone_number']
 
-            new_schedule.save()
+                new_schedule = Scheduling(
+                    user=user,
+                    name=name,
+                    scheduling_date=scheduling_date,
+                    phone_number=phone_number,
+                )
 
-            return redirect('/')
+                new_schedule.save()
 
+                return redirect('/')
+
+        else:
+            form = NewSchedulingForm()
     else:
-        form = NewSchedulingForm()
+        return redirect('/')
 
     return render(request, 'Schedules/new_scheduling.html', {'form':form})

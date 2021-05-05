@@ -13,10 +13,7 @@ class Scheduling(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
-        if self.scheduling_date >= timezone.now():
-            self.scheduling_done = 'Will be done'
-        else:
-            self.scheduling_done = 'Done'
+        self.scheduling_done = 'Will be done'
         super(Scheduling, self).save(*args, **kwargs)
 
     def __str__(self):

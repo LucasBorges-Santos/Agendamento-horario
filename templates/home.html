@@ -1,18 +1,40 @@
 {% extends 'base.html' %}
-
-{% block title %}Loja Python{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block content %}
-
     {% if user.is_authenticated %}
-    Olá {{ user.username }}!
+<h3>Olá {{ user.username }}!</h3>
+<h1>Your schedules</h1>
 
-    {% for scheduling in schedules %}
-    <p>{{scheduling.name}} - {{scheduling.scheduling_date}} - {{scheduling.scheduling_done}}</p>
-    {% endfor %}
+        {% if schedules %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+
+            {% for scheduling in schedules %}
+        <tr>
+            <td>{{scheduling.name}}</td>
+            <td>{{scheduling.scheduling_date}}</td>
+            <td>{{scheduling.scheduling_done}}</td>
+        </tr>
+
+            {% endfor %}
+    </tbody>
+</table>
+
+        {% else %}
+<p>No appointments found, you can create <a href="{% url 'pages:new_scheduling' %}">clicking here</a></p>
+
+        {% endif %}
 
     {% else %}
-    Cadastre-se ou faça login.
-    {% endif %}
+        Cadastre-se ou faça login.
 
+    {% endif %}
 {% endblock %}
