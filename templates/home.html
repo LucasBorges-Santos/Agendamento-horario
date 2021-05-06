@@ -10,6 +10,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th scope="col">id</th>
             <th scope="col">Name</th>
             <th scope="col">Date</th>
             <th scope="col">Status</th>
@@ -19,6 +20,7 @@
 
             {% for scheduling in schedules %}
         <tr>
+            <td>{{scheduling.id}}</td>
             <td>{{scheduling.name}}</td>
             <td>{{scheduling.scheduling_date}}</td>
             <td>{{scheduling.scheduling_done}}</td>
